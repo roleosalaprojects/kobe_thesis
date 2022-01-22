@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kobe_thesis/utils.dart';
+import 'package:intl/intl.dart';
 import 'user.dart' as user;
 
 class SettingsScreen extends StatefulWidget {
@@ -18,18 +21,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
   final _email = TextEditingController(text: user.email);
   final _age = TextEditingController(text: user.age);
   final _address = TextEditingController(text: user.address);
-  final _birthday = TextEditingController(text: user.name);
+  var birthday = TextEditingController(text: user.birthday);
   String gender = (user.gender) ? "Male" : "Female";
   _selectDate(BuildContext context) async {
     final DateTime? selected = await showDatePicker(
       context: context,
       initialDate: selectedDate,
       firstDate: DateTime(1900),
-      lastDate: DateTime(2025),
+      lastDate: DateTime(2050),
     );
     if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
+        birthday.text =
+            DateFormat('yyyy-MM-dd').format(selectedDate).toString();
       });
     }
   }
@@ -115,20 +120,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               maxLength: null,
               controller: _address,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                ),
-                onPressed: () {
-                  _selectDate(context);
-                },
-                child: const Text(
-                  "Select Birthdate",
-                  textAlign: TextAlign.start,
-                ),
+            TextFormField(
+              decoration: const InputDecoration(
+                icon: Icon(Icons.calendar_today),
+                labelText: "Date of Birthdate",
               ),
+              controller: birthday,
+              onTap: () {
+                _selectDate(context);
+              },
             ),
           ],
         ),
