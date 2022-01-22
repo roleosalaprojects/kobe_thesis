@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kobe_thesis/utils.dart';
 import 'package:intl/intl.dart';
@@ -45,29 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(title: const Text("Settings")),
       drawer: Drawer(
         child: ListView(
-          children: [
-            drawerHeader(),
-            ListTile(
-              title: const Text('Home'),
-              leading: const FaIcon(FontAwesomeIcons.home),
-              onTap: () {
-                Navigator.pushNamed(context, "/");
-              },
-            ),
-            ListTile(
-              title: const Text('Violators Information'),
-              leading: const FaIcon(FontAwesomeIcons.users),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('Settings'),
-              leading: const FaIcon(FontAwesomeIcons.cog),
-              onTap: () {
-                Navigator.pushNamed(context, "/settings");
-              },
-              selected: true,
-            ),
-          ],
+          children: drawerItems(context),
         ),
       ),
       body: Padding(

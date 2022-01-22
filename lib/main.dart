@@ -34,29 +34,7 @@ class _MainState extends State<Main> {
       appBar: AppBar(title: const Text("Home")),
       drawer: Drawer(
         child: ListView(
-          children: [
-            drawerHeader(),
-            ListTile(
-              title: const Text('Home'),
-              leading: const FaIcon(FontAwesomeIcons.home),
-              onTap: () {
-                Navigator.pushNamed(context, "/");
-              },
-              selected: true,
-            ),
-            ListTile(
-              title: const Text('Violators Information'),
-              leading: const FaIcon(FontAwesomeIcons.users),
-              onTap: () {},
-            ),
-            ListTile(
-              title: const Text('Settings'),
-              leading: const FaIcon(FontAwesomeIcons.cog),
-              onTap: () {
-                Navigator.pushNamed(context, "/settings");
-              },
-            ),
-          ],
+          children: drawerItems(context),
         ),
       ),
     );
