@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'user.dart' as user;
 
+int _nav = 0;
+
 List<Widget> drawerItems(BuildContext context) {
   return [
     DrawerHeader(
@@ -41,22 +43,27 @@ List<Widget> drawerItems(BuildContext context) {
       leading: const FaIcon(FontAwesomeIcons.home),
       onTap: () {
         Navigator.pushNamed(context, "/");
+        _nav = 0;
       },
-      selected: true,
+      selected: (_nav == 0) ? true : false,
     ),
     ListTile(
       title: const Text('Violators'),
       leading: const FaIcon(FontAwesomeIcons.users),
       onTap: () {
         Navigator.pushNamed(context, '/violators');
+        _nav = 1;
       },
+      selected: (_nav == 1) ? true : false,
     ),
     ListTile(
       title: const Text('Settings'),
       leading: const FaIcon(FontAwesomeIcons.cog),
       onTap: () {
         Navigator.pushNamed(context, "/settings");
+        _nav = 2;
       },
+      selected: (_nav == 2) ? true : false,
     ),
   ];
 }
